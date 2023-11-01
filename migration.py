@@ -2,10 +2,10 @@ import os
 import psycopg2
 
 
-POSTGRES_HOST = "localhost"  # os.environ["POSTGRES_HOST"]
-POSTGRES_DB = "db"  # os.environ["POSTGRES_DB"]
-POSTGRES_USER = "user"  # os.environ["POSTGRES_USER"]
-POSTGRES_PASSWORD = "password"  # os.environ["POSTGRES_PASSWORD"]
+POSTGRES_HOST = os.environ["POSTGRES_HOST"]
+POSTGRES_DB = os.environ["POSTGRES_DB"]
+POSTGRES_USER = os.environ["POSTGRES_USER"]
+POSTGRES_PASSWORD = os.environ["POSTGRES_PASSWORD"]
 
 conn = psycopg2.connect(
     host=POSTGRES_HOST,

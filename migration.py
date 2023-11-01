@@ -92,9 +92,24 @@ def migrate_v1_to_v2():
             )
 
 
+def migrate_v2_to_v3():
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute(
+                """
+                CREATE TABLE tasks (
+                  task_id TEXT NOT NULL,
+                  input INTEGER NOT NULL,
+                  output INTEGER
+                )
+                """
+            )
+
+
 VERSIONS_TO_MIGRATION_FUNCTIONS = {
     0: migrate_v0_to_v1,
-    1: migrate_v1_to_v2
+    1: migrate_v1_to_v2,
+    2: migrate_v2_to_v3
 }
 
 

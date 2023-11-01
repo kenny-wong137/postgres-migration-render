@@ -37,5 +37,34 @@ def read_root():
             return {"count": count}
 
 
+@app.post("/tasks/{task_id}")
+def create_task(task_id: str):
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute(
+                """
+                INSERT INTO tasks VALUES (%s, %s, %s)
+                """,
+                (task_id, 1, None)
+            )
+
+
+@app.get("/tasks/{task_id}")
+def get_task_result(task_id: str):
+    with conn:
+        with conn.cursor() as curs:
+            curs.execute(
+                """
+                SELECT output
+                FROM tasks
+                WHERE task_id = %s
+                """,
+                (task_id,)
+            )
+
+            row = curs.fetchone()
+            return row[0]
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
